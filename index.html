@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: black;
+
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider {
+            width: 600px;
+            height: 450px;
+            border: 5px solid rgb(20, 19, 19);
+            border-radius: 10px;
+            box-shadow: 3px 3px 10px aqua, -3px -3px 10px aqua;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+
+        }
+
+        span {
+            position: absolute;
+            top: 40%;
+            transition: 1.5s;
+            cursor: pointer;
+        }
+
+        .bus {
+            height: 100%;
+            display: flex;
+            transition: 1.5s linear;
+        }
+
+        img {
+            width: 600px;
+            height: 450px;
+            object-fit: cover;
+
+        }
+
+        #left {
+            left: 10%;
+        }
+
+        #right {
+            right: 10%;
+        }
+
+        #right,
+        #left {
+            color: antiquewhite;
+           font-size: xx-large;
+           width:70px;
+           height:70px;
+            margin: 5px 70px;
+            background-color: rgb(49, 50, 50);
+            padding: 10px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            box-shadow: 3px 3px  10px aquamarine,
+            -3px -3px  10px aquamarine;
+
+            &:hover {
+                background-color: gray;
+            }
+        }
+
+
+        #bullet {
+            width: 100%;
+            position: absolute;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        
+
+        }
+
+        li {
+            display: inline-block;
+            list-style-type: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: rgb(9, 9, 9);
+            margin: 5px 20px;
+            box-shadow: 3px 3px  10px aquamarine,
+            -3px -3px  10px aquamarine;
+
+            &:first-of-type {
+                background-color: rgb(19, 79, 79);
+            }
+        }
+
+
+
+        .ball {
+            width: 100%;
+            height: 50px;
+            background-color: rgb(9, 9, 9);
+    
+            border-radius: 10px;
+          
+
+
+        }
+    </style>
+</head>
+
+<body onload="_check()">
+    <span id="left">⬅</span>
+    <div class="slider">
+        <div class="ball">
+            <ul id="bullet"></ul>
+        </div>
+
+        <div class="bus">
+            <img src="images/imag5.jpg" alt="">
+            <img src="images/img7.avif" alt="">
+            <img src="images/imagevan3.avif" alt="">
+            <img src="images/img4.avif" alt="">
+            <img src="images/imagevan1.avif" alt="">
+            <img src="images/img6.avif" alt="">
+            <img src="images/img8.avif" alt="">
+            <img src="images/img9.avif" alt="">
+            <img src="images/img10.avif" alt="">
+
+        </div>
+
+
+    </div>
+
+    <span id="right">➡</span>
+    <br><br><br><br>
+
+
+
+</body>
+<script>
+    let turn = 0
+    let left = 0
+    let imgs = document.querySelectorAll('.bus img')
+    imgs.forEach(() => {
+        let li = document.createElement('li')
+        bullet.appendChild(li)
+    })
+    let _bullet = document.querySelectorAll('#bullet >li')
+    console.log(_bullet);
+    _bullet.forEach((val, index) => {
+        val.addEventListener('click', () => {
+            resetBullet()
+            //    ****** reset hast code pain
+            // _bullet.forEach((item) => {
+            //     item.style.background = 'aqua'
+            // })
+            val.style.background = 'gray'
+            left = -(index * 600)
+            document.querySelector('.bus').style.transform = 'translateX(' + left + 'px)'
+            _check()
+            turn = index
+
+        })
+
+    })
+
+    document.getElementsByClassName('bus')[0].style.width = (((imgs.length) * 600)) + 'px'
+    document.getElementById('right').addEventListener('click', () => {
+        left = left - 600
+        document.querySelector('.bus').style.transform = 'translateX(' + left + 'px)'
+        _check()
+        turn++
+        resetBullet()
+        _bullet[turn].style.background = 'black'
+
+
+    })
+    document.getElementById('left').addEventListener('click', () => {
+        left = left + 600
+        document.querySelector('.bus').style.transform = 'translateX(' + left + 'px)'
+        _check()
+        turn--
+        resetBullet()
+        _bullet[turn].style.background = 'black'
+
+    })
+    function _check() {
+        if (left == 0) {
+            document.getElementById('left').style.left = '-300px'
+        } else {
+            document.getElementById('left').style.left = '10%'
+
+        }
+        if (left <= ((imgs.length - 1) * (-600))) {
+            document.getElementById('right').style.right = '-300px'
+        } else {
+            document.getElementById('right').style.right = '10%'
+
+        }
+    }
+
+    function resetBullet() {
+        _bullet.forEach((item) => {
+            item.style.background = 'white'
+        })
+
+    }
+</script>
+
+</html>
