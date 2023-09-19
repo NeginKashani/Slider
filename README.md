@@ -1,7 +1,7 @@
 # slider
 
 
-- [Demo Project]()
+- [Demo Project](https://neginkashani.github.io/slider/)
 
 - Developed by Negin Kashani
 
